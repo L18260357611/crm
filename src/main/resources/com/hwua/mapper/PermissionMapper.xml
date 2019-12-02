@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hwua.mapper.PermissionMapper">
+    <select id="queryByrid" resultMap="p1">
+       SELECT p.id,p.permissionName,p.url FROM role_permission rp,permission p where rp.roleId=#{id} and rp.permissionId=p.id
+    </select>
+    <resultMap id="p1" type="permission">
+        <id property="id" column="id"></id>
+        <result property="permissionName" column="permissionName"></result>
+        <result property="url" column="url"></result>
+    </resultMap>
+    <select id="findAll" resultType="permission">
+        select id,permissionName,url from permission;
+    </select>
+    <select id="findPermissionByID" resultType="permission">
+         select id,permissionName,url from permission where id=#{id}
+    </select>
+    <insert id="addpermission">
+        insert into permission values (#{id},#{permissionName},#{url})
+    </insert>
+    <delete id="delpermission">
+        delete from permission where id=#{id}
+    </delete>
+</mapper>
